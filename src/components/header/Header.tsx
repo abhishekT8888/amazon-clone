@@ -1,8 +1,72 @@
 import React from 'react'
+import Image from 'next/image';
+import logo from '../../images/logo.png'
+import Cart from '../../images/cart.png';
+import { IoLocationOutline } from "react-icons/io5";
+import { BiCaretDown } from 'react-icons/bi';
+import { HiOutlineSearch } from 'react-icons/hi';
+
+
+
 
  const Header = () => {
   return (
-    <div>Header</div>
+    <div className='w-full h-15 bg-amazon_blue text-lightText sticky top-0 z-50'>
+      <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
+
+        {/* Amazon logo */}
+        <div className=' px-2 py-3 border border-transparent hover:border-white cursor-pointer duration-300 
+        items-center justify-center h-[70%]'>
+          <Image className='w-28 object-contain' src={logo} alt='logo of amazon'/>
+        </div>
+
+        {/* delivery to */}
+        <div className='inline-flex border border-transparent hover:border-white px-2 py-1 duration-300 cursor-pointer'>
+          <IoLocationOutline className='mt-5 mr-2' />
+          <div className='text-sm'>
+            <p>Delivery to</p>
+            <p className='font-bold uppercase text-white'>India</p>
+          </div>
+        </div>
+
+        {/* Searchbar */}
+        <div className='flex-1 h-10 hidden md:inline-flex items-center justify-center relative ml-5'>
+          <input
+            type="search"
+            placeholder="Search Amazon.in"
+            className='w-full h-full rounded-lg py-2 px-5 text-sm text-black border-[3px] border-transparent outline-none focus-visible:border-amazon_yellow'
+          />
+          <span className='bg-amazon_yellow text-2xl text-black h-full w-12 flex items-center justify-center rounded-md absolute right-0 rounded-br-md  focus-visible:border-amazon_yellow'>
+            <HiOutlineSearch/>
+          </span>
+        </div>
+
+        {/* Sign in */}
+        <div className=' text-sm px-2 border border-transparent hover:border-white cursor-pointer duration-300 
+        items-center justify-center h-[70%]'>
+          <p>Hello, signin</p>
+          <p className='text-white font-bold flex items-center'>Accounts & Lists {""}
+            <span><BiCaretDown/> </span>
+          </p>
+        </div>
+
+
+        {/* Favourite */}
+        <div className=' px-2 py-1 border border-transparent hover:border-white cursor-pointer duration-300 
+        items-center justify-center h-[70%]'>
+          <p>Marked</p>
+          <p className='text-white font-bold'>& Favourite</p>
+        </div>
+
+        {/* Cart button */}
+        <div className='flex  px-2 py-1 border border-transparent hover:border-white cursor-pointer duration-300 
+        items-center justify-center h-[70%] relative'>
+          <Image className='w-auto object-contain' src={Cart}  alt='image p=of shopping cart '/>
+          <p className='text-ml text-white font-bold mt-3'>Cart</p>
+          <span className='absolute text-amazon_yellow text-sm top-1 left-[29px] font-bold'>0</span>
+        </div>
+      </div>
+    </div>
   )
 }
 
