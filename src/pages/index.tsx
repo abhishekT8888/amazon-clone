@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/header/Header";
 import HeaderBottom from "@/components/header/HeaderBottom";
 import React from "react";
@@ -7,8 +8,7 @@ import React from "react";
 export default function Home() {
   return (
     <main>
-      <Header/>
-      <HeaderBottom/>
+      <div className="py-10 bg-gray-500"></div>
     </main>
   );
 }
