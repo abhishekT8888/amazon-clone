@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
+import Link from 'next/link'
 import logo from '../../images/logo.png'
 import Cart from '../../images/cart.png';
 import { IoLocationOutline } from "react-icons/io5";
@@ -15,10 +16,10 @@ import { HiOutlineSearch } from 'react-icons/hi';
       <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
 
         {/* Amazon logo */}
-        <div className=' px-2 py-3 border border-transparent hover:border-white cursor-pointer duration-300 
+        <Link href={"/"} className=' px-2 py-3 border border-transparent hover:border-white cursor-pointer duration-300 
         items-center justify-center h-[70%]'>
           <Image className='w-28 object-contain' src={logo} alt='logo of amazon'/>
-        </div>
+        </Link>
 
         {/* delivery to */}
         <div className='inline-flex border border-transparent hover:border-white px-2 py-1 duration-300 cursor-pointer'>
@@ -59,12 +60,12 @@ import { HiOutlineSearch } from 'react-icons/hi';
         </div>
 
         {/* Cart button */}
-        <div className='flex  px-2 py-1 border border-transparent hover:border-white cursor-pointer duration-300 
-        items-center justify-center h-[70%] relative'>
+        <Link href={"/cart"} className='flex  px-2 py-1 border border-transparent hover:border-white cursor-pointer duration-300 
+          items-center justify-center h-[70%] relative'>
           <Image className='w-auto object-contain' src={Cart}  alt='image p=of shopping cart '/>
           <p className='text-ml text-white font-bold mt-3'>Cart</p>
-          <span className='absolute text-amazon_yellow text-sm top-1 left-[29px] font-bold'>0</span>
-        </div>
+          <span className='absolute text-amazon_yellow text-2xl top-1 left-[50px] font-bold'>0</span>
+        </Link>
       </div>
     </div>
   )

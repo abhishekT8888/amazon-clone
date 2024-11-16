@@ -8,7 +8,7 @@ import React from "react";
 export default function Home() {
   return (
     <main>
-      <div className="py-10 bg-gray-500"></div>
+      <div className="py-10 bg-gray-500">Home page</div>
     </main>
   );
 }

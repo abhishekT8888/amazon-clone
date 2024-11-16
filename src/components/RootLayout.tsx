@@ -7,12 +7,12 @@ import Footer from "./Footer";
 interface props{
     children:ReactElement;
 }
-const RootLayout = ({Children}:props) =>{
+const RootLayout = ({children}:props) =>{
   return (
     <>
         <Header/>
         <HeaderBottom/>
-        {Children}
+        {children}
         <Footer/>
     </>
   )
