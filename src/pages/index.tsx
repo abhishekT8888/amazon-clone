@@ -7,7 +7,7 @@ import { productProps } from "@/type.d";
 import React from "react";
 
 interface props{
-  productData:productProps
+  productData:productProps[];
 }
 export default function Home({productData}:props) {
   console.log(productData)
@@ -15,7 +15,7 @@ export default function Home({productData}:props) {
     <main>
       <div >
         <Banner/>
-        <Product/>
+        <Product productData={productData} />
       </div>
       
     </main>
