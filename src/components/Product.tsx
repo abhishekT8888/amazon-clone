@@ -1,5 +1,5 @@
 import React from 'react';
-import { productProps } from '@/type.d'; // Make sure this is properly imported
+import { productProps } from '@/type.d'; // Make sure this is properly imported // Ensure this is properly imported
 
 const Product = ({ productData }: { productData: productProps[] }) => {
   return (
@@ -8,7 +8,7 @@ const Product = ({ productData }: { productData: productProps[] }) => {
       {productData.map(({ id, title, price, description, category, image }: productProps) => (
         <div
           key={id}
-          className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col"
+          className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col h-full"
         >
           {/* Product Image with aspect ratio control */}
           <div className="w-full h-64 mb-4 relative">
@@ -22,7 +22,7 @@ const Product = ({ productData }: { productData: productProps[] }) => {
           {/* Product Title */}
           <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{title}</h3>
 
-          {/* Product Description (showing the first part with a "Read More" option) */}
+          {/* Product Description */}
           <p className="text-gray-600 text-sm mb-4 line-clamp-3">{description}</p>
 
           {/* Product Category */}
@@ -32,9 +32,11 @@ const Product = ({ productData }: { productData: productProps[] }) => {
           <p className="text-xl font-semibold text-gray-900 mb-4">${price}</p>
 
           {/* Add to Cart Button */}
-          <button className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200">
-            Add to Cart
-          </button>
+          <div className="mt-auto">
+            <button className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200 w-full">
+              Add to Cart
+            </button>
+          </div>
         </div>
       ))}
     </div>
