@@ -1,7 +1,14 @@
 import React from 'react';
-import { productProps } from '@/type.d'; // Make sure this is properly imported // Ensure this is properly imported
+import { productProps } from '@/type.d'; // Make sure this is properly imported 
+import { Dispatch } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/store/nextSlice';
+
 
 const Product = ({ productData }: { productData: productProps[] }) => {
+
+  const dispatch = useDispatch();
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
       {/* Mapping over the array of products */}
@@ -33,7 +40,17 @@ const Product = ({ productData }: { productData: productProps[] }) => {
 
           {/* Add to Cart Button */}
           <div className="mt-auto">
-            <button className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 transition duration-200 w-full">
+            <button onClick={()=>dispatch(
+              addToCart({
+                id:id,
+                title:title,
+                price:price,
+                description:description,
+                category:category,
+                image:image,
+                quantity:1,
+              })
+            )} className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 active:bg-yellow-600  transition duration-200  w-full">
               Add to Cart
             </button>
           </div>

@@ -12,7 +12,7 @@ export interface productProps {
 }
 
 // StoreProductS interface should represent the store's product structure (seems like a typo in your original code)
-export interface StoreProductS {
+export interface StoreProduct {
   id: number;
   title: string;      // Primitive string type
   price: number;
@@ -28,3 +28,6 @@ export interface StateProps {
   userInfo: null | string;        
   next: any;                      
 }
+
+
+

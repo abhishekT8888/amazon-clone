@@ -10,7 +10,7 @@ interface props{
   productData:productProps[];
 }
 export default function Home({productData}:props) {
-  console.log(productData)
+
   return (
     <main>
       <div >
