@@ -2,11 +2,9 @@ import React from 'react';
 import { productProps } from '@/type.d'; // Make sure this is properly imported 
 import { Dispatch } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '@/store/nextSlice';
-
+import { addToCart, addToFavorite } from '@/store/nextSlice'; // Assuming you have addToFavorites action
 
 const Product = ({ productData }: { productData: productProps[] }) => {
-
   const dispatch = useDispatch();
 
   return (
@@ -38,20 +36,45 @@ const Product = ({ productData }: { productData: productProps[] }) => {
           {/* Product Price */}
           <p className="text-xl font-semibold text-gray-900 mb-4">${price}</p>
 
-          {/* Add to Cart Button */}
-          <div className="mt-auto">
-            <button onClick={()=>dispatch(
-              addToCart({
-                id:id,
-                title:title,
-                price:price,
-                description:description,
-                category:category,
-                image:image,
-                quantity:1,
-              })
-            )} className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 active:bg-yellow-600  transition duration-200  w-full">
+          {/* Buttons */}
+          <div className="mt-auto space-y-2">
+            {/* Add to Cart Button */}
+            <button
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: id,
+                    title: title,
+                    price: price,
+                    description: description,
+                    category: category,
+                    image: image,
+                    quantity: 1,
+                  })
+                )
+              }
+              className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 active:bg-yellow-600 transition duration-200 w-full"
+            >
               Add to Cart
+            </button>
+
+            {/* Add to Favorites Button */}
+            <button
+              onClick={() =>
+                dispatch(
+                  addToFavorite({
+                    id: id,
+                    title: title,
+                    price: price,
+                    description: description,
+                    category: category,
+                    image: image,
+                  })
+                )
+              }
+              className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md hover:bg-yellow-500 active:bg-yellow-600 transition duration-200 w-full"
+            >
+              Add to Favorites
             </button>
           </div>
         </div>

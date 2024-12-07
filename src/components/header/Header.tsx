@@ -6,11 +6,16 @@ import Cart from '../../images/cart.png';
 import { IoLocationOutline } from "react-icons/io5";
 import { BiCaretDown } from 'react-icons/bi';
 import { HiOutlineSearch } from 'react-icons/hi';
-
+import { useDispatch, UseDispatch , useSelector } from 'react-redux';
+import {StateProps} from "../../type.d"
 
 
 
  const Header = () => {
+  const dispatch = useDispatch();
+  const {productData,favoriteData,userInfo}=useSelector(
+    (state:StateProps)=>state.next || {}
+  );
   return (
     <div className='w-full h-15 bg-amazon_blue text-lightText sticky top-0 z-50'>
       <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
@@ -57,6 +62,13 @@ import { HiOutlineSearch } from 'react-icons/hi';
         items-center justify-center h-[70%]'>
           <p>Marked</p>
           <p className='text-white font-bold'>& Favourite</p>
+          {
+            favoriteData.length>0 && (
+              <span>
+                {favoriteData.length}
+              </span>
+            )
+          }
         </div>
 
         {/* Cart button */}
@@ -64,7 +76,9 @@ import { HiOutlineSearch } from 'react-icons/hi';
           items-center justify-center h-[70%] relative'>
           <Image className='w-auto object-contain' src={Cart}  alt='image p=of shopping cart '/>
           <p className='text-ml text-white font-bold mt-3'>Cart</p>
-          <span className='absolute text-amazon_yellow text-2xl top-1 left-[50px] font-bold'>0</span>
+          <span className='absolute text-amazon_yellow text-2xl top-1 left-[50px] font-bold'>
+            {productData ? productData.length:0}
+          </span>
         </Link>
       </div>
     </div>

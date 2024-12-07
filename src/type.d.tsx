@@ -19,6 +19,7 @@ export interface StoreProduct {
   description: string; // Primitive string type
   category: string;    // Primitive string type
   image: string;       // Primitive string type
+  quantity:number;
 }
 
 // StateProps interface represents the state structure for your application

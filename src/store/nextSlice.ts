@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StoreProduct } from "@/type.d";
+import { access, stat } from "fs";
+import { act } from "react";
 
 
 interface Nextstate{
@@ -10,7 +12,7 @@ interface Nextstate{
 
 }
 // Correcting the variable name to 'initialState'
-const initialState = {
+const initialState:Nextstate = {
     productData: [],
     favoriteData: [],
     allProducts: [],
@@ -24,13 +26,66 @@ export const nextSlice = createSlice({
     reducers: {
         // Add to cart functionality
         addToCart: (state, action) => {
-            state.productData === action.payload.id; // Add the product to the cart
+           const  exsitingProduct = state.productData.find(
+            (item:StoreProduct)=>item.id===action.payload.id
+           )
+           if(exsitingProduct){
+            exsitingProduct.quantity += action.payload.quantity
+           }
+           else{
+            state.productData.push(action.payload)
+           }
         },
+        addToFavorite: (state, action) => {
+           const  exsitingProduct = state.productData.find(
+            (item:StoreProduct)=>item.id===action.payload.id
+           )
+           if(exsitingProduct){
+            exsitingProduct.quantity += action.payload.quantity
+           }
+           else{
+            state.favoriteData.push(action.payload)
+           }
+        },
+        increaseQuantity:(state,action)=>{
+            const exsitingProduct=state.productData.find(
+                (item:StoreProduct)=>item.id===action.payload.id
+            )
+            exsitingProduct && exsitingProduct.quantity++;
+        },
+        decreaseQuantity:(state,action)=>{
+            const exsitingProduct=state.productData.find(
+                (item:StoreProduct)=>item.id===action.payload.id
+            )
+            if( exsitingProduct?.quantity==1){
+                exsitingProduct.quantity==1;
+            }
+            else{
+                exsitingProduct!.quantity--;
+            }
+        },
+        deleteProduct:(state,action)=>{
+            state.productData = state.productData.filter(
+                (item)=>item.id !== action.payload
+            );
+        },
+        resetCart:(state)=>{
+            state.productData=[]
+        },
+        addUser:(state,action)=>{
+            state.userInfo = action.payload
+        },
+        removeUser:(state,action)=>{
+            state.userInfo = null
+        },
+        setAllProducts:(state,action)=>{
+            state.allProducts=action.payload
+        }
     },
 });
 
 // Export actions
-export const { addToCart } = nextSlice.actions;
+export const { addToCart,addToFavorite,increaseQuantity,decreaseQuantity,deleteProduct,removeUser,resetCart,addUser,setAllProducts } = nextSlice.actions;
 
 // Export the reducer
 export default nextSlice.reducer;
