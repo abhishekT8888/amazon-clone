@@ -65,7 +65,7 @@ import {StateProps} from "../../type.d"
           {
             favoriteData.length>0 && (
               <span>
-                {favoriteData.length}
+                {favoriteData.length  }
               </span>
             )
           }
