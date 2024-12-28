@@ -8,6 +8,9 @@ import { BiCaretDown } from 'react-icons/bi';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { useDispatch, UseDispatch , useSelector } from 'react-redux';
 import {StateProps} from "../../type.d"
+import { useSession,signIn,signOut } from 'next-auth/react';
+import { addUser } from '@/store/nextSlice';
+import { useEffect } from 'react';
 
 
 
@@ -16,6 +19,23 @@ import {StateProps} from "../../type.d"
   const {productData,favoriteData,userInfo}=useSelector(
     (state:StateProps)=>state.next || {}
   );
+  const{data:session}=useSession();
+  console.log(userInfo)
+
+  useEffect(()=>{
+    if(session){
+      dispatch(addUser(
+        {
+          name:session?.user?.name,
+          email:session?.user?.email,
+          image:session?.user?.image,
+          
+        }
+      ))
+    }
+  },[session]);
+
+  
   return (
     <div className='w-full h-15 bg-amazon_blue text-lightText sticky top-0 z-50'>
       <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
@@ -47,15 +67,23 @@ import {StateProps} from "../../type.d"
           </span>
         </div>
 
-        {/* Sign in */}
-        <div className=' text-sm px-2 border border-transparent hover:border-white cursor-pointer duration-300 
-        items-center justify-center h-[70%]'>
-          <p>Hello, signin</p>
-          <p className='text-white font-bold flex items-center'>Accounts & Lists {""}
-            <span><BiCaretDown/> </span>
-          </p>
-        </div>
-
+       {/* Sign in */}
+        {userInfo?<div 
+                 className="flex items-center px-2 border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] gap-1">
+                    <img src={userInfo.image} alt="userImage"
+                    className="w-8 h-8 rounded-full object-cover"/>
+                    <div className="text-xs text-gray-100 flec flex-col
+                    justify-between">
+                        <p className="text-white font-bold">{userInfo.name}</p>
+                        <p>{userInfo.email}</p>
+                    </div>
+                </div>:<div onClick={()=>signIn()} className="text-xs text-gray-100 flex flex-col justify-center px-2 border
+            border-transparent hover:border-white cursor-pointer duration-300 h-[70%]">
+                <p>Hello, sign in</p>
+                <p className="text-white font-bold flex">Account & Lists{" "}<span>
+                    <BiCaretDown/></span></p>
+            </div>
+            }
 
         {/* Favourite */}
         <div className=' px-2 py-1 border border-transparent hover:border-white cursor-pointer duration-300 

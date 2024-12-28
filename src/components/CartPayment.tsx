@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import FormattedPrice from './FormattedPrice';
 
 const CartPayment = ()=> {
-    const {productData,useInfo} = useSelector((state:StateProps)=>state.next);
+    const {productData,userInfo} = useSelector((state:StateProps)=>state.next);
     const[totalAmount,setTotalAmount] = useState(0);
     useEffect(()=>{
         let amount = 0;
@@ -15,6 +15,10 @@ const CartPayment = ()=> {
         })
         setTotalAmount(amount);
     },[productData])
+    const handleCheckout = () => {
+      // Add your checkout logic here
+      console.log('Proceeding to checkout');
+  };
   return (
     <div className='flex flex-col gap-4'>
         <div className='flex gap-2'>
@@ -29,14 +33,25 @@ const CartPayment = ()=> {
                 <FormattedPrice amount={totalAmount}/>
             </span>
         </p>
-        <div className="flex flex-col items-center">
-            <button  className="w-full h-10 text-sm font-semibold bg-amazon_yellow
-              text-black rounded-lg hover:bg-amazon_blue hover:text-white duration-300">Proceed to Checkout
-            </button>
-            <p className="text-xs mt-1 text-red-500 font-semibold animate-bounce">
-            Please Login to Continue
-          </p>
-        </div>
+        {userInfo ? (
+                <div className="flex flex-col items-center">
+                    <button
+                        onClick={handleCheckout}
+                        className="w-full h-10 text-sm font-semibold bg-amazon_yellow text-black rounded-lg hover:bg-amazon_blue hover:text-white duration-300"
+                    >
+                        Proceed to Checkout
+                    </button>
+                </div>
+            ) : (
+                <div className="flex flex-col items-center">
+                    <button className="w-full h-10 text-sm font-semibold bg-amazon_blue bg-opacity-50 text-white rounded-lg cursor-not-allowed">
+                        Proceed to Checkout
+                    </button>
+                    <p className="text-xs mt-1 text-red-500 font-semibold animate-bounce">
+                        Please Login to Continue
+                    </p>
+                </div>
+            )}
 
     </div>
   )

@@ -1,3 +1,5 @@
+/* This code snippet is a TypeScript file that defines a Redux slice using the `@reduxjs/toolkit`
+library. Here's a breakdown of what the code is doing: */
 import { createSlice } from "@reduxjs/toolkit";
 import { StoreProduct } from "@/type.d";
 import { access, stat } from "fs";
@@ -75,7 +77,7 @@ export const nextSlice = createSlice({
         addUser:(state,action)=>{
             state.userInfo = action.payload
         },
-        removeUser:(state,action)=>{
+        removeUser:(state)=>{
             state.userInfo = null
         },
         setAllProducts:(state,action)=>{
