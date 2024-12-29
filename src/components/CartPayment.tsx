@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { SiMediafire } from 'react-icons/si';
 import { useSelector } from 'react-redux';
 import FormattedPrice from './FormattedPrice';
+import { loadStripe } from '@stripe/stripe-js';
+import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
+import { json } from 'stream/consumers';
 
 const CartPayment = ()=> {
     const {productData,userInfo} = useSelector((state:StateProps)=>state.next);
@@ -15,10 +19,29 @@ const CartPayment = ()=> {
         })
         setTotalAmount(amount);
     },[productData])
-    const handleCheckout = () => {
-      // Add your checkout logic here
-      console.log('Proceeding to checkout');
-  };
+
+    //stripe payment gateway
+    const stripePromise = loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+    )      
+    const {data:Session} = useSession();
+    const handleCheckout = async()=>{
+        const stripe = await stripePromise;
+        const response = await fetch("/api/checkout",{
+            method:"post",
+            headers:{
+                "content-Type":"application/json",
+            },
+            body: JSON.stringify({ items: productData, email: Session?.user?.email }),
+        });
+        const checkoutSession = await response.json();
+        const result: any = await stripe?.redirectToCheckout({
+            sessionId: checkoutSession.id,
+          });
+        if (result.error) {
+           alert(result?.error.message);
+         }
+    }
   return (
     <div className='flex flex-col gap-4'>
         <div className='flex gap-2'>
